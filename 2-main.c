@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
-#include "2-selection_sort.c"
+/*#include "2-selection_sort.c"
 #include "print_list.c"
 #include "print_array.c"
 #include "1-insertion_sort_list.c"
-#include "0-bubble_sort.c"
+#include "0-bubble_sort.c"*/
 
 /**
  * main - Entry point
