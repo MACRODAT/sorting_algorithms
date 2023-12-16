@@ -55,9 +55,9 @@ void insertion_sort_list(listint_t **list)
 			if (u->n > p->n)
 			{
 				swap_nodes(u, p);
-				print_list(*list);
 				if (!p->prev)
 					*list = p;
+				print_list(*list);
 				u = p;
 			}
 			u = u->prev;
