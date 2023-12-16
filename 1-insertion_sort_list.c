@@ -55,6 +55,10 @@ void insertion_sort_list(listint_t **list)
 				p = u;
 			u = u->prev;
 		} while (u);
+		if (!p->prev)
+		{
+			*list = t;
+		}
 		if (p != t)
 		{
 			swap_nodes(p, t);
