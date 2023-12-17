@@ -18,14 +18,16 @@ void shell_sort(int *array, size_t size)
 	i = j = 0;
 	while (k > 0)
 	{
-		print_array(array, size);
-		for (i = 0; i + k < size; i++)
+		for (i = size - 1; i - k < size; i--)
 		{
-			if (k > 1)
+			j = 1;
+			if (k > 0)
 			{
-				if (array[i] > array[i + k])
+				while (i >= k * j)
 				{
-					_swap(array, i, i + k);
+					if (array[i] < array[i - k * j])
+						_swap(array, i, i - j * k);
+					j++;
 				}
 			}
 			else
@@ -44,5 +46,6 @@ void shell_sort(int *array, size_t size)
 			}
 		}
 		k = (k - 1) / 3;
+		print_array(array, size);
 	}
 }
