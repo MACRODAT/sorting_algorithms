@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
-#include "3-quick_sort.c"
+#include "print_list.c"
 #include "print_array.c"
+#include "1-insertion_sort_list.c"
+#include "100-shell_sort.c"
 
 /**
  * main - Entry point
@@ -11,12 +13,12 @@
  */
 int main(void)
 {
-    int array[] = {5, 10, 100};
+    int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
     size_t n = sizeof(array) / sizeof(array[0]);
 
     print_array(array, n);
     printf("\n");
-    quick_sort(array, n);
+    shell_sort(array, n);
     printf("\n");
     print_array(array, n);
     return (0);
