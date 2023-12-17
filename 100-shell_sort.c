@@ -9,12 +9,12 @@
 #include "sort.h"
 
 /**
- * get_max_gap - gets the a largest Knuth Sequence gap for this size
+ * gesx - dze
  * @size: the size of the array
  *
  * Return: the gap size
  */
-size_t get_max_gap(size_t size)
+size_t gesx(size_t size)
 {
 	size_t n;
 
@@ -26,8 +26,8 @@ size_t get_max_gap(size_t size)
 
 /**
  * shell_sort - shell_sort
- * @array: the integer array to sort
- * @size: the size of the array
+ * @array: to sort
+ * @size: tay
  *
  * Return: void
  */
@@ -40,7 +40,7 @@ void shell_sort(int *array, size_t size)
 		return;
 
 
-	for (gap = get_max_gap(size); gap; gap = (gap - 1) / 3)
+	for (gap = gesx(size); gap; gap = (gap - 1) / 3)
 	{
 		for (i = gap; i < size; i++)
 		{
