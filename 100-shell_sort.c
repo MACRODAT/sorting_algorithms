@@ -2,13 +2,6 @@
 #include "0-bubble_sort.c"
 
 /**
- * shell_sort - insert and sort
- * @array: list
- * @size: size
-*/
-#include "sort.h"
-
-/**
  * gesx - dze
  * @size: the size of the array
  *
