@@ -21,28 +21,11 @@ void shell_sort(int *array, size_t size)
 		for (i = size - 1; i - k < size; i--)
 		{
 			j = 1;
-			if (k > 0)
+			while (i >= k * j)
 			{
-				while (i >= k * j)
-				{
-					if (array[i] < array[i - k * j])
-						_swap(array, i, i - j * k);
-					j++;
-				}
-			}
-			else
-			{
-				j = i;
-				while (1)
-				{
-					if (array[j] > array[j + 1])
-					{
-						_swap(array, j, j + 1);
-					}
-					if (j == 0)
-						break;
-					j--;
-				}
+				if (array[i] < array[i - k * j])
+					_swap(array, i, i - j * k);
+				j++;
 			}
 		}
 		k = (k - 1) / 3;
