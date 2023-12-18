@@ -12,7 +12,7 @@ void counting_sort(int *array, size_t size)
 	size_t i = 0, counter = 0;
 
 	while (i < size)
-		if (counter < array[i++])
+		if ((int)counter < array[i++])
 			counter = array[i - 1];
 	cat = malloc(sizeof(int) * (counter + 1));
 	while (i < size)
