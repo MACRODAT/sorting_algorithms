@@ -23,6 +23,7 @@ void counting_sort(int *array, size_t size)
 		cat[array[i]] += 1;
 		i++;
 	}
+	print_array(cat);
 	i = counter = 0;
 	while (i < size)
 	{
