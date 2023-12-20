@@ -1,6 +1,6 @@
 #include "sort.h"
 
-node_t* construct_heap(int *array, int i, size_t size)
+node_t *construct_heap(int *array, int i, size_t size)
 {
 	node_t *n;
 
@@ -15,15 +15,16 @@ node_t* construct_heap(int *array, int i, size_t size)
 	return (NULL);
 }
 
-void swap_nodes(node_t *x, node_t *y)
+void swap_nodes(node_t *x, node_t *y, int *array, size_t size)
 {
 	int tmp = x->value;
 
 	x->value = y->value;
 	y->value = tmp;
+	print_array(array, size);
 }
 
-void max_heap(node_t *root)
+void max_heap(node_t *root, int *array, size_t size)
 {
 	node_t *my_leaf;
 
@@ -34,41 +35,23 @@ void max_heap(node_t *root)
 	if (root->right && (!root->right->right && !root->right->left))
 	{
 		if (root->right->value > root->value)
-			swap_nodes(root, root->right);
+			swap_nodes(root, root->right, array, size);
 		if (root->left && root->left->value > root->value)
-			swap_nodes(root, root->left);
+			swap_nodes(root, root->left, array, size);
 		return;
 	}
 	if (root->left && (!root->left->right && !root->left->left))
 	{
 		if (root->left->value > root->value)
-			swap_nodes(root, root->left);
+			swap_nodes(root, root->left, array, size);
 		return;
 	}
-	max_heap(root->left);
-	max_heap(root->right);
+	max_heap(root->left, array, size);
+	max_heap(root->right, array, size);
 	if (root->right && root->right->value > root->value)
-		swap_nodes(root, root->right);
+		swap_nodes(root, root->right, array, size);
 	if (root->left && root->left->value > root->value)
-		swap_nodes(root, root->left);
-}
-
-void max_heapify(node_t *root)
-{
-	if (!root)
-		return;
-	if (!root->left && !root->right)
-		return;
-	if (root->left && root->left->value > root->value)
-	{
-		swap_nodes(root->left, root);
-	}
-	if (root->right && root->right->value > root->value)
-	{
-		swap_nodes(root, root->right);
-	}
-	max_heapify(root->left);
-	max_heapify(root->right);
+		swap_nodes(root, root->left, array, size);
 }
 
 void heap_sort(int *array, size_t size)
@@ -77,7 +60,7 @@ void heap_sort(int *array, size_t size)
 	int i = 0;
 
 	root = construct_heap(array, 0, size);
-	max_heap(root);
+	max_heap(root, array, size);
 	while (root)
 	{
 		t = root;
@@ -105,16 +88,15 @@ void heap_sort(int *array, size_t size)
 					t = t->right;
 			}
 		}
-		print_array(array, size);
 		if (!root->left && !root->right)
 			break;
-		swap_nodes(root, t);
+		swap_nodes(root, t, array, size);
 		if (p->left == t)
 			p->left = NULL;
 		else
 			p->right = NULL;
 		free(t);
-		max_heap(root);
+		max_heap(root, array, size);
 		i++;
 	}
 }
