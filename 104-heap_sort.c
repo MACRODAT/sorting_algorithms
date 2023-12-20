@@ -52,15 +52,15 @@ void siftdown(int *array, size_t start, size_t end, size_t size)
 }
 
 /**
-*heapify - makes heap in-place
+*heapify - asd
 *
-*@array: array to be sorted
-*@size: size of array
+*@array: asd
+*@size: asd
 *
 */
 void heapify(int *array, size_t size)
 {
-	ssize_t start;
+	size_t start;
 
 	start = parent(size - 1);
 	while (start >= 0)
@@ -70,10 +70,10 @@ void heapify(int *array, size_t size)
 	}
 }
 /**
-*heap_sort - heap sort algorithm
+*heap_sort - das
 *
-*@array: array to sort
-*@size: size of array
+*@array: das
+*@size: sda
 *
 */
 void heap_sort(int *array, size_t size)
