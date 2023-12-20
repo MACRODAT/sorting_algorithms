@@ -1,102 +1,93 @@
 #include "sort.h"
+#define parent(x) (((x) - 1) / 2)
+#define leftchild(x) (((x) * 2) + 1)
 
-node_t *construct_heap(int *array, int i, size_t size)
+/**
+ * wsp - wsps 2 int values
+ * @array: the integer array to sort
+ * @size: the size of the array
+ * @a: address of first value
+ * @b: address of second value
+ *
+ * Return: void
+ */
+void wsp(int *array, size_t size, int *a, int *b)
 {
-	node_t *n;
-
-	if (i < size)
+	if (*a != *b)
 	{
-		n = (node_t *)malloc(sizeof(node_t *));
-		n->value = array[i];
-		n->left = construct_heap(array, 2 * i + 1, size);
-		n->right = construct_heap(array, 2 * i + 2, size);
-		return (n);
+		*a = *a + *b;
+		*b = *a - *b;
+		*a = *a - *b;
 	}
-	return (NULL);
+	print_array((const int *)array, size);
 }
 
-void swap_nodes(node_t *x, node_t *y, int *array, size_t size)
+/**
+*siftdown - sss
+*
+*@array: adsad
+*@start: stsda
+*@end: asd
+*@size: asd
+*
+*/
+void siftdown(int *array, size_t start, size_t end, size_t size)
 {
-	int tmp = x->value;
+	size_t root = start, _wsp, child;
 
-	x->value = y->value;
-	y->value = tmp;
-	print_array(array, size);
+	while (leftchild(root) <= end)
+	{
+		child = leftchild(root);
+		_wsp = root;
+		if (array[_wsp] < array[child])
+			_wsp = child;
+		if (child + 1 <= end &&
+			array[_wsp] < array[child + 1])
+			_wsp = child + 1;
+		if (_wsp == root)
+			return;
+		wsp(array, size, &array[root], &array[_wsp]);
+		root = _wsp;
+	}
 }
 
-void max_heap(node_t *root, int *array, size_t size)
+/**
+*heapify - makes heap in-place
+*
+*@array: array to be sorted
+*@size: size of array
+*
+*/
+void heapify(int *array, size_t size)
 {
-	node_t *my_leaf;
+	ssize_t start;
 
-	if (!root)
-		return;
-	if (!root->left && !root->right)
-		return;
-	if (root->right && (!root->right->right && !root->right->left))
+	start = parent(size - 1);
+	while (start >= 0)
 	{
-		if (root->right->value > root->value)
-			swap_nodes(root, root->right, array, size);
-		if (root->left && root->left->value > root->value)
-			swap_nodes(root, root->left, array, size);
-		return;
+		siftdown(array, start, size - 1, size);
+		start--;
 	}
-	if (root->left && (!root->left->right && !root->left->left))
-	{
-		if (root->left->value > root->value)
-			swap_nodes(root, root->left, array, size);
-		return;
-	}
-	max_heap(root->left, array, size);
-	max_heap(root->right, array, size);
-	if (root->right && root->right->value > root->value)
-		swap_nodes(root, root->right, array, size);
-	if (root->left && root->left->value > root->value)
-		swap_nodes(root, root->left, array, size);
 }
-
+/**
+*heap_sort - heap sort algorithm
+*
+*@array: array to sort
+*@size: size of array
+*
+*/
 void heap_sort(int *array, size_t size)
 {
-	node_t *root, *t, *p;
-	int i = 0;
+	size_t end;
 
-	root = construct_heap(array, 0, size);
-	max_heap(root, array, size);
-	while (root)
+	if (!array || size < 2)
+		return;
+	heapify(array, size);
+	end = size - 1;
+	while (end > 0)
 	{
-		t = root;
-		array[i] = root->value;
-		while (t)
-		{
-			if (!t->left && !t->right)
-				break;
-			if (!t->left)
-			{
-				p = t;
-				t = t->right;
-			}
-			else if (!t->right)
-			{
-				p = t;
-				t = t->left;
-			}
-			else
-			{
-				p = t;
-				if (t->left->value > t->right->value)
-					t = t->left;
-				else
-					t = t->right;
-			}
-		}
-		if (!root->left && !root->right)
-			break;
-		swap_nodes(root, t, array, size);
-		if (p->left == t)
-			p->left = NULL;
-		else
-			p->right = NULL;
-		free(t);
-		max_heap(root, array, size);
-		i++;
+		wsp(array, size, &array[end], &array[0]);
+		end--;
+		siftdown(array, 0, end, size);
 	}
 }
