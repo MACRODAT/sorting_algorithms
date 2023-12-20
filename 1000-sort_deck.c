@@ -52,11 +52,11 @@ void insertion_sort_list(deck_node_t **list)
 }
 
 /**
-* s_deck - sorsdfion
+* sort_deck - sorsdfion
 * @deck: adsdfead
 *
 */
-void s_deck(deck_node_t **deck)
+void sort_deck(deck_node_t **deck)
 {
 	insertion_sort_list(deck);
 }

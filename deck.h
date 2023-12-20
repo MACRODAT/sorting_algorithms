@@ -20,7 +20,19 @@ typedef enum kind_e
 } kind_t;
 
 /**
- * struct deck_node_s - Deck of card
+ * struct card_s - Pasd
+ *
+ * @value: das
+ * @kind: Kidas
+ */
+typedef struct card_s
+{
+	const char *value;
+	const kind_t kind;
+} card_t;
+
+/**
+ * struct deck_node_s - dasas asd
  *
  * @card: Pointsdfe
  * @prev: Psdflist
@@ -32,18 +44,6 @@ typedef struct deck_node_s
 	struct deck_node_s *prev;
 	struct deck_node_s *next;
 } deck_node_t;
-
-/**
- * struct card_s - Pasd
- *
- * @value: das
- * @kind: Kidas
- */
-typedef struct card_s
-{
-	const char *value;
-	const kind_t kind;
-} card_t;
 
 void sort_deck(deck_node_t **deck);
 int less_than(const card_t *a, const card_t *b);
