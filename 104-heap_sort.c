@@ -1,6 +1,35 @@
 #include "sort.h"
 #define parent(x) (((x) - 1) / 2)
-#define leftchild(x) (((x) * 2) + 1)
+#define leaf_c(x) (((x) * 2) + 1)
+
+/**
+*siftdown - sss
+*
+*@array: adsad
+*@start: stsda
+*@end: asd
+*@size: asd
+*
+*/
+void siftdown(int *array, size_t start, size_t end, size_t size)
+{
+	size_t root = start, _wsp, child;
+
+	while (leaf_c(root) <= end)
+	{
+		child = leaf_c(root);
+		_wsp = root;
+		if (array[_wsp] < array[child])
+			_wsp = child;
+		if (child + 1 <= end &&
+			array[_wsp] < array[child + 1])
+			_wsp = child + 1;
+		if (_wsp == root)
+			return;
+		wsp(array, size, &array[root], &array[_wsp]);
+		root = _wsp;
+	}
+}
 
 /**
  * wsp - wsps 2 int values
@@ -20,35 +49,6 @@ void wsp(int *array, size_t size, int *a, int *b)
 		*a = *a - *b;
 	}
 	print_array((const int *)array, size);
-}
-
-/**
-*siftdown - sss
-*
-*@array: adsad
-*@start: stsda
-*@end: asd
-*@size: asd
-*
-*/
-void siftdown(int *array, size_t start, size_t end, size_t size)
-{
-	size_t root = start, _wsp, child;
-
-	while (leftchild(root) <= end)
-	{
-		child = leftchild(root);
-		_wsp = root;
-		if (array[_wsp] < array[child])
-			_wsp = child;
-		if (child + 1 <= end &&
-			array[_wsp] < array[child + 1])
-			_wsp = child + 1;
-		if (_wsp == root)
-			return;
-		wsp(array, size, &array[root], &array[_wsp]);
-		root = _wsp;
-	}
 }
 
 /**
