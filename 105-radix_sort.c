@@ -28,17 +28,18 @@ int get_digit(long number, int digit)
 void radix_sort(int *array, size_t size)
 {
 	int i = 0, j = 0, x = 0, p = 0, max_, digits = 1;
+	int sz = (int)size;
 	int *sorted;
 
 	if (!array)
 		return;
 	max_ = array[0];
-	sorted = malloc(sizeof(int) * size);
-	while (i < size)
+	sorted = malloc(sizeof(int) * sz);
+	while (i < sz)
 	{
 		if (array[i] > max_)
 			max_ = array[i];
-		sorted[i++] = array[i];
+		sorted[i] = array[i], i++;
 	}
 	i = max_;
 	while ((i = (i / 10)) >= 1)
@@ -50,7 +51,7 @@ void radix_sort(int *array, size_t size)
 		for (x = 0; x < 10; x++)
 		{
 			i = 0;
-			while (i < size)
+			while (i < sz)
 			{
 				if (get_digit(array[i], j) == x)
 				{
@@ -60,11 +61,10 @@ void radix_sort(int *array, size_t size)
 			}
 		}
 		i = 0;
-		while (i < size)
-			array[i++] = sorted[i];
+		while (i < sz)
+			array[i] = sorted[i], i++;
 		j++;
-		print_array(sorted, size);
+		print_array(sorted, sz);
 	}
-
 	free(sorted);
 }
