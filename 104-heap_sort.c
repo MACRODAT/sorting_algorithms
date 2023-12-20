@@ -1,93 +1,63 @@
 #include "sort.h"
-#define parent(x) (((x) - 1) / 2)
-#define leaf_c(x) (((x) * 2) + 1)
 
 /**
-*siftdown - sss
-*
-*@array: adsad
-*@start: stsda
-*@end: asd
-*@size: asd
-*
-*/
-void siftdown(int *array, size_t start, size_t end, size_t size)
-{
-	size_t root = start, _wsp, child;
-
-	while (leaf_c(root) <= end)
-	{
-		child = leaf_c(root);
-		_wsp = root;
-		if (array[_wsp] < array[child])
-			_wsp = child;
-		if (child + 1 <= end &&
-			array[_wsp] < array[child + 1])
-			_wsp = child + 1;
-		if (_wsp == root)
-			return;
-		wsp(array, size, &array[root], &array[_wsp]);
-		root = _wsp;
-	}
-}
-
-/**
- * wsp - wsps 2 int values
- * @array: the integer array to sort
- * @size: the size of the array
- * @a: address of first value
- * @b: address of second value
- *
- * Return: void
+ * swap_root - sdf
+ * @array: fsd
+ * @root: Thesfd heap.sdf
+ * @hi: sdf
+ * @size: dfsray.
  */
-void wsp(int *array, size_t size, int *a, int *b)
+void swap_root(int *array, size_t root, size_t hi, size_t size)
 {
-	if (*a != *b)
+	size_t lo = 0, mi = 0, tmp = 0;
+	int aux = 0;
+
+	while ((lo = (2 * root + 1)) <= hi)
 	{
-		*a = *a + *b;
-		*b = *a - *b;
-		*a = *a - *b;
+		tmp = root;
+		mi = lo + 1;
+		if (array[tmp] < array[lo])
+			tmp = lo;
+		if (mi <= hi && array[tmp] < array[mi])
+			tmp = mi;
+		if (tmp == root)
+			return;
+		aux = array[root];
+		array[root] = array[tmp];
+		array[tmp] = aux;
+		print_array(array, size);
+		root = tmp;
 	}
-	print_array((const int *)array, size);
 }
 
 /**
-*heapify - asd
-*
-*@array: asd
-*@size: asd
-*
-*/
-void heapify(int *array, size_t size)
-{
-	size_t start;
-
-	start = parent(size - 1);
-	while (start)
-	{
-		siftdown(array, start, size - 1, size);
-		start--;
-	}
-}
-/**
-*heap_sort - das
-*
-*@array: das
-*@size: sda
-*
-*/
+ * heap_sort - asd
+ * @array: Aasd
+ * @size: da
+ */
 void heap_sort(int *array, size_t size)
 {
-	size_t end;
+	size_t hi = 0, gap = 0;
+	int tmp = 0;
 
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
-	heapify(array, size);
-	end = size - 1;
-	while (end > 0)
+
+	for (gap = (size - 2) / 2; 1; gap--)
 	{
-		wsp(array, size, &array[end], &array[0]);
-		end--;
-		siftdown(array, 0, end, size);
+		swap_root(array, gap, size - 1, size);
+		if (gap == 0)
+			break;
+	}
+
+	hi = size - 1;
+	while (hi > 0)
+	{
+		tmp = array[hi];
+		array[hi] = array[0];
+		array[0] = tmp;
+		print_array(array, size);
+		hi--;
+		swap_root(array, 0, hi, size);
 	}
 }
