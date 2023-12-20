@@ -55,7 +55,6 @@ void radix_sort(int *array, size_t size)
 				if (get_digit(array[i], j) == x)
 				{
 					sorted[p++] = array[i];
-					print_array(sorted, size);
 				}
 				i++;
 			}
@@ -64,6 +63,7 @@ void radix_sort(int *array, size_t size)
 		while (i < size)
 			array[i++] = sorted[i];
 		j++;
+		print_array(sorted, size);
 	}
 
 	free(sorted);
