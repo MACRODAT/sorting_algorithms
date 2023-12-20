@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
-#include "print_array.c"
-#include "104-heap_sort.c"
 
 /**
  * main - Entry point
